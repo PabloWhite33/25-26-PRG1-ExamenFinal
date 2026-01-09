@@ -1,14 +1,18 @@
 import java.util.Scanner;
 
-public class JuegoAdivinanza {
+public class JuegoAdivinanzaWhite {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("Juego de Adivinanza - Adivina el Numero Secreto");
         
-        int numeroMinimo = 1;
-        int numeroMaximo = 100;
-        int intentosMaximos = 10; 
+        int numeroSecreto;
+        int numero;
+        int intentos; 
+        int maxIntentos;
+        int maxNumero;
+        boolean adivinado = false;
+
+        Scanner sc = new Scanner(System.in);      
 
         System.out.println(); 
         System.out.println("Selecciona Dificultad:");
