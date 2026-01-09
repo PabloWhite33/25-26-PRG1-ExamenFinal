@@ -6,9 +6,9 @@ public class JuegoAdivinanza {
 
         System.out.println("Juego de Adivinanza - Adivina el Numero Secreto");
         
-        int minN = 1;
-        int maxN = 100;
-        int maxI = 10; 
+        int numeroMinimo = 1;
+        int numeroMaximo = 100;
+        int intentosMaximos = 10; 
 
         System.out.println(); 
         System.out.println("Selecciona Dificultad:");
@@ -19,33 +19,33 @@ public class JuegoAdivinanza {
         int d = sc.nextInt();
 
         if (d == 1) {
-            maxN = 50;
-            maxI = 10;
+            numeroMaximo = 50;
+            intentosMaximos = 10;
         } else if (d == 2) {
-            maxN = 100;
-            maxI = 7;
+            numeroMaximo = 100;
+            intentosMaximos = 7;
         } else if (d == 3) {
-            maxN = 200;
-            maxI = 8;
+            numeroMaximo = 200;
+            intentosMaximos = 8;
         } else {
             System.out.println("Opcion no valida, usando dificultad Normal.");
         }
 
         System.out.println(); 
-        System.out.println("Adivina el numero entre " + minN + " y " + maxN);
+        System.out.println("Adivina el numero entre " + numeroMinimo + " y " + numeroMaximo);
 
-        int ns = (int)(Math.random() * (maxN - minN + 1)) + minN;
+        int ns = (int)(Math.random() * (numeroMaximo - numeroMinimo + 1)) + numeroMinimo;
         int intentosRealizados = 0;
         boolean adivinado = false;
 
 
-        int[] histN = new int[maxI];
-        String[] histP = new String[maxI];
+        int[] histN = new int[intentosMaximos];
+        String[] histP = new String[intentosMaximos];
         int idx = 0;
 
-        while (intentosRealizados < maxI && !adivinado) {
+        while (intentosRealizados < intentosMaximos && !adivinado) {
             System.out.println(); 
-            System.out.println("Intento " + (intentosRealizados + 1) + "/" + maxI + ": ");
+            System.out.println("Intento " + (intentosRealizados + 1) + "/" + intentosMaximos + ": ");
             System.out.println("[1] Adivinar [2] Pedir Pista");
             System.out.print("Opcion: ");
             int opt_juego = sc.nextInt();
@@ -53,7 +53,7 @@ public class JuegoAdivinanza {
             String pistaActual = "";
 
             if (opt_juego == 2) { 
-                if (intentosRealizados >= maxI - 1) { 
+                if (intentosRealizados >= intentosMaximos - 1) { 
                     System.out.println("No puedes pedir mas pistas, es tu ultimo intento.");
                     pistaActual = "Pista denegada";
                 } else {
@@ -68,7 +68,7 @@ public class JuegoAdivinanza {
                         System.out.println("El numero es multiplo de 3.");
                     }
                     pistaActual = "Pista solicitada";
-                    if (idx < maxI) {
+                    if (idx < intentosMaximos) {
                         histN[idx] = 0; 
                         histP[idx] = pistaActual;
                         idx++;
@@ -79,10 +79,10 @@ public class JuegoAdivinanza {
                 System.out.print("Tu numero: ");
                 int n = sc.nextInt();
                 
-                if (n < minN || n > maxN) {
-                    System.out.println("El numero debe estar entre " + minN + " y " + maxN);
+                if (n < numeroMinimo || n > numeroMaximo) {
+                    System.out.println("El numero debe estar entre " + numeroMinimo + " y " + numeroMaximo);
                     pistaActual = "Fuera de rango";
-                    if (idx < maxI) {
+                    if (idx < intentosMaximos) {
                         histN[idx] = n;
                         histP[idx] = pistaActual;
                         idx++;
@@ -115,7 +115,7 @@ public class JuegoAdivinanza {
                     }
                 }
                 
-                if (idx < maxI) {
+                if (idx < intentosMaximos) {
                     histN[idx] = n;
                     histP[idx] = pistaActual;
                     idx++;
