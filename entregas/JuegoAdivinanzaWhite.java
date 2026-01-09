@@ -8,31 +8,33 @@ public class JuegoAdivinanzaWhite {
         int numeroSecreto;
         int numero;
         int intentos; 
-        int maxIntentos;
-        int maxNumero;
+        int intentosMaximos;
+        int numeroMaximo;
         boolean adivinado = false;
 
-        Scanner sc = new Scanner(System.in);      
+        Scanner scanner = new Scanner(System.in);      
 
-        System.out.println(); 
-        System.out.println("Selecciona Dificultad:");
+        System.out.println("JUEGO DE ADIVINANZA"); 
+        System.out.println("Selecciona la dificultad:");
         System.out.println("1. Facil (1-50, 10 intentos)");
         System.out.println("2. Normal (1-100, 7 intentos)");
         System.out.println("3. Dificil (1-200, 8 intentos)");
         System.out.print("Opcion: ");
-        int d = sc.nextInt();
+        int opcion = scanner.nextInt();
 
-        if (d == 1) {
+        if (opcion == 1) {
             numeroMaximo = 50;
             intentosMaximos = 10;
-        } else if (d == 2) {
+        } else if (opcion == 2) {
             numeroMaximo = 100;
             intentosMaximos = 7;
-        } else if (d == 3) {
+        } else if (opcion == 3) {
             numeroMaximo = 200;
             intentosMaximos = 8;
         } else {
             System.out.println("Opcion no valida, usando dificultad Normal.");
+            numeroMaximo = 100;
+            intentosMaximos = 7;
         }
 
         System.out.println(); 
