@@ -10,6 +10,7 @@ public class JuegoAdivinanzaWhite {
         int intentos; 
         int intentosMaximos;
         int numeroMaximo;
+        int opcion;
         boolean adivinado = false;
 
         Scanner scanner = new Scanner(System.in);      
@@ -20,7 +21,7 @@ public class JuegoAdivinanzaWhite {
         System.out.println("2. Normal (1-100, 7 intentos)");
         System.out.println("3. Dificil (1-200, 8 intentos)");
         System.out.print("Opcion: ");
-        int opcion = scanner.nextInt();
+        opcion = scanner.nextInt();
 
         if (opcion == 1) {
             numeroMaximo = 50;
@@ -37,100 +38,47 @@ public class JuegoAdivinanzaWhite {
             intentosMaximos = 7;
         }
 
-        System.out.println(); 
-        System.out.println("Adivina el numero entre " + numeroMinimo + " y " + numeroMaximo);
+        numeroSecreto = (int)(Math.random() * numeroMaximo) + 1;
+        intentos = 0;
 
-        int ns = (int)(Math.random() * (numeroMaximo - numeroMinimo + 1)) + numeroMinimo;
-        int intentosRealizados = 0;
-        boolean adivinado = false;
+        System.out.println("Adivina el numero entre 1 y" + numeroMaximo);
 
 
-        int[] histN = new int[intentosMaximos];
-        String[] histP = new String[intentosMaximos];
-        int idx = 0;
+        while ((intentos < maxIntentos) && (!adivinado)) {
 
-        while (intentosRealizados < intentosMaximos && !adivinado) {
-            System.out.println(); 
-            System.out.println("Intento " + (intentosRealizados + 1) + "/" + intentosMaximos + ": ");
-            System.out.println("[1] Adivinar [2] Pedir Pista");
+            System.out.println("Intento " + (intentos + 1) + " de " + maxIntentos);
+            System.out.println("1. Adivinar numero");
+            System.out.println("2. Pedir pista");
             System.out.print("Opcion: ");
-            int opt_juego = sc.nextInt();
+            opcion = entrada.nextInt();
 
-            String pistaActual = "";
+            if (opcion == 2) {
 
-            if (opt_juego == 2) { 
-                if (intentosRealizados >= intentosMaximos - 1) { 
-                    System.out.println("No puedes pedir mas pistas, es tu ultimo intento.");
-                    pistaActual = "Pista denegada";
+                if (numeroSecreto % 2 == 0) {
+                    System.out.println("PISTA: El numero es PAR");
                 } else {
-                    intentosRealizados++; 
-                    System.out.print("PISTA: ");
-                    if (ns % 2 == 0) { 
-                        System.out.println("El numero es par.");
-                    } else {
-                        System.out.println("El numero es impar.");
-                    }
-                    if (ns % 3 == 0) { 
-                        System.out.println("El numero es multiplo de 3.");
-                    }
-                    pistaActual = "Pista solicitada";
-                    if (idx < intentosMaximos) {
-                        histN[idx] = 0; 
-                        histP[idx] = pistaActual;
-                        idx++;
-                    }
+                    System.out.println("PISTA: El numero es IMPAR");
                 }
-                continue; 
-            } else if (opt_juego == 1) { 
-                System.out.print("Tu numero: ");
-                int n = sc.nextInt();
-                
-                if (n < numeroMinimo || n > numeroMaximo) {
-                    System.out.println("El numero debe estar entre " + numeroMinimo + " y " + numeroMaximo);
-                    pistaActual = "Fuera de rango";
-                    if (idx < intentosMaximos) {
-                        histN[idx] = n;
-                        histP[idx] = pistaActual;
-                        idx++;
-                    }
-                    continue; 
-                }
-                
-                intentosRealizados++;
 
-                if (n == ns) {
+            } else if (opcion == 1) {
+
+                System.out.print("Ingrese un numero: ");
+                numero = entrada.nextInt();
+                intentos++;
+
+                if (numero == numeroSecreto) {
                     adivinado = true;
-                    System.out.println("¡Felicidades! ¡Has adivinado el numero!");
-                    System.out.println("Lo lograste en " + intentosRealizados + " intentos");
-                    pistaActual = "¡Adivinado!";
-                } else if (n < ns) {
-                    System.out.println("El numero es MAYOR");
-                    if (n > ns - 5 && n < ns + 5) { 
-                        System.out.println("¡Muy cerca!");
-                        pistaActual = "MAYOR, ¡Muy cerca!";
-                    } else {
-                        pistaActual = "MAYOR";
-                    }
-                } else { 
-                    System.out.println("El numero es MENOR");
-                    if (n > ns - 5 && n < ns + 5) { 
-                        System.out.println("¡Muy cerca!");
-                        pistaActual = "MENOR, ¡Muy cerca!";
-                    } else {
-                        pistaActual = "MENOR";
-                    }
+                    System.out.println("¡Felicidades! Adivinaste el numero.");
+                } else if (numero < numeroSecreto) {
+                    System.out.println("El numero secreto es MAYOR.");
+                } else {
+                    System.out.println("El numero secreto es MENOR.");
                 }
-                
-                if (idx < intentosMaximos) {
-                    histN[idx] = n;
-                    histP[idx] = pistaActual;
-                    idx++;
-                }
+
             } else {
                 System.out.println("Opcion invalida.");
-                pistaActual = "Opcion invalida";
-                
             }
+
         }
 
         if (!adivinado) {
