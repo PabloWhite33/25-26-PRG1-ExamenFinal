@@ -81,23 +81,15 @@ public class JuegoAdivinanzaWhite {
 
         }
 
-        if (!adivinado) {
-            System.out.println();
-            System.out.println("¡Se acabaron los intentos!");
-            System.out.println("El numero era: " + ns);
+        if (adivinado) {
+            System.out.println("Lo lograste en " + intentos + " intentos.");
+        } else {
+            System.out.println("Se acabaron los intentos.");
+            System.out.println("El numero era: " + numeroSecreto);
         }
 
-        System.out.println(); 
-        System.out.println("Historial de Intentos");
-        for (int k = 0; k < idx; k++) {
-            System.out.println((k + 1) + ". " + histN[k] + " -> " + histP[k]);
-        }
-        if (idx == 0) {
-            System.out.println("(No hubo intentos)");
-        }
-
-        System.out.println(); 
         System.out.println("Fin del juego");
-        sc.close();
+
+        scanner.close();
     }
 }
